@@ -13,48 +13,93 @@ import 'package:flutter_boost/flutter_boost.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Stack(
-        children: [
-          Column(
-            children: [
-              HomeSwipper([
-                "https://t7.baidu.com/it/u=4071610061,2917123939&fm=193&f=GIF",
-                "https://t7.baidu.com/it/u=824649223,881307550&fm=193&f=GIF",
-                "https://t7.baidu.com/it/u=4210785492,3843497194&fm=193&f=GIF"
-              ]),
-              Container(
-                color: Colors.black12,
-                width: ScreenUtil().setWidth(750),
-                height: ScreenUtil().setHeight(1334 - 500 - 60),
-                child: FutureBuilder(
-                  future: _getRequestData(context),
-                  builder: (context, snapShot) {
-                    if (snapShot.hasData) {
-                      print("数据：");
-                      print(HomeProvider().homeModel);
-                      HomeModel homeModel =
-                          context.watch<HomeProvider>().homeModel;
-
-                      print(homeModel);
-                      return _hasDataUI();
-                    } else {
-                      return Text(
-                        "加载中……",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: ScreenUtil().setSp(18)),
-                      );
-                    }
-                  },
-                ),
+    return
+        NestedScrollView(
+          headerSliverBuilder: (context, innserBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                title: _searchBar(),
+                floating: true,
+                expandedHeight: 200.0,
+                forceElevated: innserBoxIsScrolled,
+                flexibleSpace: HomeSwipper([
+                  "https://t7.baidu.com/it/u=4071610061,2917123939&fm=193&f=GIF",
+                  "https://t7.baidu.com/it/u=824649223,881307550&fm=193&f=GIF",
+                  "https://t7.baidu.com/it/u=4210785492,3843497194&fm=193&f=GIF"
+                ]),
               )
-            ],
+            ];
+          },
+          body: Container(
+            color: Colors.black12,
+            width: ScreenUtil().setWidth(750),
+            height: ScreenUtil().setHeight(1334 - 500 - 60),
+            child: FutureBuilder(
+              future: _getRequestData(context),
+              builder: (context, snapShot) {
+                if (snapShot.hasData) {
+                  print("数据：");
+                  print(HomeProvider().homeModel);
+                  HomeModel homeModel = context.watch<HomeProvider>().homeModel;
+
+                  print(homeModel);
+                  return _hasDataUI();
+                } else {
+                  return Text(
+                    "加载中……",
+                    style: TextStyle(
+                        color: Colors.white, fontSize: ScreenUtil().setSp(18)),
+                  );
+                }
+              },
+            ),
           ),
-          _searchBar(),
-        ],
-      ),
-    );
+        );
+        // _searchBar(),
+
+   
+
+    //   Stack(
+    //     children: [
+    //       Column(
+    //         children: [
+    //            HomeSwipper([
+    //             "https://t7.baidu.com/it/u=4071610061,2917123939&fm=193&f=GIF",
+    //             "https://t7.baidu.com/it/u=824649223,881307550&fm=193&f=GIF",
+    //             "https://t7.baidu.com/it/u=4210785492,3843497194&fm=193&f=GIF"
+    //           ]),
+    //           Container(
+    //             color: Colors.black12,
+    //             width: ScreenUtil().setWidth(750),
+    //             height: ScreenUtil().setHeight(1334 - 500 - 60),
+    //             child: FutureBuilder(
+    //               future: _getRequestData(context),
+    //               builder: (context, snapShot) {
+    //                 if (snapShot.hasData) {
+    //                   print("数据：");
+    //                   print(HomeProvider().homeModel);
+    //                   HomeModel homeModel =
+    //                       context.watch<HomeProvider>().homeModel;
+    //
+    //                   print(homeModel);
+    //                   return _hasDataUI();
+    //                 } else {
+    //                   return Text(
+    //                     "加载中……",
+    //                     style: TextStyle(
+    //                         color: Colors.white,
+    //                         fontSize: ScreenUtil().setSp(18)),
+    //                   );
+    //                 }
+    //               },
+    //             ),
+    //           )
+    //         ],
+    //       ),
+    //       _searchBar(),
+    //     ],
+    //
+    // );
   }
 
   ///头部
@@ -64,7 +109,7 @@ class HomePage extends StatelessWidget {
       child: InkWell(
         onTap: () {
           print("点击搜索");
-          var map = {"a":"b"};
+          var map = {"a": "b"};
           BoostNavigator.instance.pop(map);
         },
         child: Container(
@@ -99,8 +144,6 @@ class HomePage extends StatelessWidget {
   Future _getRequestData(BuildContext context) async {
     await requestGet(requestPath["recommendUrl"]).then((value) {
       try {
-
-
         Map<String, dynamic> json = jsonDecode(value);
         print("json解析完成");
         HomeModel homeModel = HomeModel.fromJson(json);
