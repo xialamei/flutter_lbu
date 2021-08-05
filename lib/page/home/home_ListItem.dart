@@ -106,13 +106,19 @@ class HomeListItem extends StatelessWidget {
   }
 
   Widget _gridView() {
-    return GridView.builder(
-        padding: EdgeInsets.only(top: 0),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, mainAxisSpacing: 1),
-        itemCount: model.comics.length,
-        itemBuilder: (context, index) {
-          return _gridItem(model.comics[index]);
-        });
+    if (model.comics == null || model.comics.length == 0) {
+      return Container();
+    } else {
+      return GridView.builder(
+
+         physics: NeverScrollableScrollPhysics(), ///禁止滚动
+          padding: EdgeInsets.only(top: 0),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, mainAxisSpacing: 1),
+          itemCount: model.comics.length,
+          itemBuilder: (context, index) {
+            return _gridItem(model.comics[index]);
+          });
+    }
   }
 }
