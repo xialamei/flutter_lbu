@@ -16,7 +16,14 @@ class HomeSwipper extends StatelessWidget {
       child: Swiper(
         itemCount: list.length,
         itemBuilder: (BuildContext context,int index ){
-          return Image.network(list[index],fit: BoxFit.fill,);
+          return Hero(tag: index, child: InkWell(
+            child: Image.network(list[index],fit: BoxFit.fill,),
+            onTap: (){
+              Navigator.of(context).push(new MaterialPageRoute(builder: (context){
+                return ScanImage(list, index);
+              }));
+            },
+          ));
         },
         autoplay: true,
         pagination: new SwiperPagination(
@@ -28,6 +35,39 @@ class HomeSwipper extends StatelessWidget {
         // indicatorLayout: PageIndicatorLayout.COLOR ,
 
       ),
+    );
+  }
+}
+
+
+
+class ScanImage extends StatelessWidget {
+  
+  final imageUrl;
+  final index;
+  ScanImage(this.imageUrl,this.index);
+  
+  @override
+  Widget build(BuildContext context) {
+    return  Scaffold(
+      body:
+      InkWell(
+          onTap: (){
+            Navigator.pop(context);
+          },
+        child:  Container(
+          color: Colors.black,
+          width: ScreenUtil().setWidth(750),
+          height: ScreenUtil().setHeight(1334),
+          alignment: Alignment.center,
+            child: Hero(
+              tag:index,
+              child: Image.network(imageUrl[index],fit: BoxFit.fill,),
+            ),
+        ),
+      ),
+
+
     );
   }
 }

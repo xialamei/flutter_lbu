@@ -13,8 +13,8 @@ class DetailPage2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
+    return Expanded(
+      // color: Colors.white,
       child: Column(
         children: [
           createHeader(context),
@@ -22,6 +22,7 @@ class DetailPage2 extends StatelessWidget {
         ],
       ),
     );
+
   }
 
   Widget createHeader(BuildContext context) {
@@ -35,11 +36,10 @@ class DetailPage2 extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-
-
-               // var list = Provider.of<DetailsProvider>(context,listen: false).chapters;
+              // var list = Provider.of<DetailsProvider>(context,listen: false).chapters;
               var list = context.read<DetailsProvider>().chapters;
-              Provider.of<DetailsProvider>(context,listen: false).setChapts( list.reversed.toList());
+              Provider.of<DetailsProvider>(context, listen: false)
+                  .setChapts(list.reversed.toList());
 
               print("点击倒序");
             },
@@ -56,11 +56,13 @@ class DetailPage2 extends StatelessWidget {
       if (chapters.length == 0) {
         return Text("no data ……");
       }
-      return Container(
-        width: ScreenUtil().setWidth(750),
-        height: ScreenUtil().setHeight(1334 - 300),
-        margin: EdgeInsets.symmetric(horizontal: 10),
+      return Expanded(
+        // width: ScreenUtil().setWidth(750),
+        // height: ScreenUtil().setHeight(500),
+        // margin: EdgeInsets.symmetric(horizontal: 10),
         child: GridView.builder(
+          shrinkWrap: true,
+            // physics: NeverScrollableScrollPhysics(),
             padding: EdgeInsets.only(top: 0),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10,
@@ -79,7 +81,9 @@ class DetailPage2 extends StatelessWidget {
                 child: Text(chapters[index].name),
               );
             }),
-      );
+
+         );
+
     });
   }
 }

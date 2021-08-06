@@ -12,13 +12,16 @@ class DetailsPage1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _createDescribe(),
-        _createOther(),
-        _createBill(),
-        _guessLike(),
-      ],
+    return SingleChildScrollView(
+      physics: NeverScrollableScrollPhysics(),
+      child: Column(
+        children: [
+          _createDescribe(),
+          _createOther(),
+          _createBill(),
+          _guessLike(),
+        ],
+      ),
     );
   }
 

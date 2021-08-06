@@ -169,10 +169,10 @@ class Comics {
 
   Comics.fromJson(Map<String, dynamic> json) {
     comicId = json['comicId'];
-    name = json['name'];
+    name = json['name']== null ? "": json['name'];
     cover = json['cover'];
     tags = (json['tags']!= null && !(json['tags'].isEmpty)) ? json['tags'].cast<String>() : [];
-    subTitle = json['subTitle'];
+    subTitle = json['subTitle'] == null ? "" : json['subTitle'];
     description = json['description'];
     cornerInfo = json['cornerInfo'];
     shortDescription = json['short_description'];

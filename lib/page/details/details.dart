@@ -44,6 +44,7 @@ class _DetailsPageState extends State<DetailsPage>  with SingleTickerProviderSta
             return CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
+
                   //是否随着滑动隐藏标题
                   floating: true,
                   //是否固定在顶部
@@ -61,11 +62,13 @@ class _DetailsPageState extends State<DetailsPage>  with SingleTickerProviderSta
                   pinned: true,
                   delegate: StickyTabBarDelegate(
                     child: TabBar(
+
                       labelColor: Colors.green,
                       indicatorColor: Colors.green,
                       unselectedLabelColor: Colors.black87,
                       controller: this.tabController,
                       indicatorSize:TabBarIndicatorSize.label,
+
                       tabs: <Widget>[
                         Tab(text: '详情'),
                         Tab(text: '目录'),
@@ -82,6 +85,8 @@ class _DetailsPageState extends State<DetailsPage>  with SingleTickerProviderSta
                       page1(context),
                       page2(context),
                       Center(child: Text('Content of Profile')),
+
+
                     ],
                   ),
                 ),
@@ -109,9 +114,9 @@ class _DetailsPageState extends State<DetailsPage>  with SingleTickerProviderSta
   }
 
   Widget page2(BuildContext context) {
-    return Consumer<DetailsProvider>(builder: (context, detail, child) {
+     return Consumer<DetailsProvider>(builder: (context, detail, child) {
       return DetailPage2();
-    });
+      });
   }
 
   Widget tab(BuildContext context) {

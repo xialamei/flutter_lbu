@@ -10,11 +10,23 @@ import 'home/home_ListItem.dart';
 import 'dart:convert';
 import 'package:flutter_boost/flutter_boost.dart';
 
-class HomePage extends StatelessWidget {
+
+class HomePage extends StatefulWidget {
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
+
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
     return
         NestedScrollView(
+
           headerSliverBuilder: (context, innserBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
@@ -30,6 +42,7 @@ class HomePage extends StatelessWidget {
               )
             ];
           },
+
           body: Container(
             color: Colors.black12,
             width: ScreenUtil().setWidth(750),
@@ -55,51 +68,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
         );
-        // _searchBar(),
 
-   
-
-    //   Stack(
-    //     children: [
-    //       Column(
-    //         children: [
-    //            HomeSwipper([
-    //             "https://t7.baidu.com/it/u=4071610061,2917123939&fm=193&f=GIF",
-    //             "https://t7.baidu.com/it/u=824649223,881307550&fm=193&f=GIF",
-    //             "https://t7.baidu.com/it/u=4210785492,3843497194&fm=193&f=GIF"
-    //           ]),
-    //           Container(
-    //             color: Colors.black12,
-    //             width: ScreenUtil().setWidth(750),
-    //             height: ScreenUtil().setHeight(1334 - 500 - 60),
-    //             child: FutureBuilder(
-    //               future: _getRequestData(context),
-    //               builder: (context, snapShot) {
-    //                 if (snapShot.hasData) {
-    //                   print("数据：");
-    //                   print(HomeProvider().homeModel);
-    //                   HomeModel homeModel =
-    //                       context.watch<HomeProvider>().homeModel;
-    //
-    //                   print(homeModel);
-    //                   return _hasDataUI();
-    //                 } else {
-    //                   return Text(
-    //                     "加载中……",
-    //                     style: TextStyle(
-    //                         color: Colors.white,
-    //                         fontSize: ScreenUtil().setSp(18)),
-    //                   );
-    //                 }
-    //               },
-    //             ),
-    //           )
-    //         ],
-    //       ),
-    //       _searchBar(),
-    //     ],
-    //
-    // );
   }
 
   ///头部

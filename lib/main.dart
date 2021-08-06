@@ -107,9 +107,16 @@ class LBUHomePage extends StatefulWidget {
 
   @override
   _LBUHomePageState createState() => _LBUHomePageState();
+
 }
 
-class _LBUHomePageState extends State<LBUHomePage> {
+class _LBUHomePageState extends State<LBUHomePage> with AutomaticKeepAliveClientMixin{
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive  => true;
+
+  PageController _pageController ;
+
   int currentIndex = 0;
   List<Widget> pages = [
     HomePage(),
@@ -118,8 +125,24 @@ class _LBUHomePageState extends State<LBUHomePage> {
     MinePage()
   ];
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this._pageController = PageController(initialPage: currentIndex,keepPage: true);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _pageController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     ScreenUtil.init(
         BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width,
@@ -131,6 +154,8 @@ class _LBUHomePageState extends State<LBUHomePage> {
         onTap: (index) {
           setState(() {
             currentIndex = index;
+            _pageController.jumpToPage(index);
+
           });
         },
         currentIndex: currentIndex,
@@ -146,9 +171,14 @@ class _LBUHomePageState extends State<LBUHomePage> {
         unselectedLabelStyle: TextStyle(color: Colors.grey),
         showUnselectedLabels: true,
       ),
-      body: Container(
-        child: pages[currentIndex],
+      body: PageView(
+        // child: pages[currentIndex],
+        children: pages,
+        controller: _pageController,
+        physics: NeverScrollableScrollPhysics(),
       ),
     );
   }
+
+
 }

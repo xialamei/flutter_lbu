@@ -9,14 +9,18 @@ import 'category/categorymodel.dart';
 import 'category/categoryprovider.dart';
 import 'dart:convert';
 
-class CategoryPage extends StatefulWidget {
+class CategoryPage extends StatefulWidget  {
   const CategoryPage({Key key}) : super(key: key);
 
   @override
   _CategoryPageState createState() => _CategoryPageState();
 }
 
-class _CategoryPageState extends State<CategoryPage> {
+class _CategoryPageState extends State<CategoryPage>  with AutomaticKeepAliveClientMixin{
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,4 +79,6 @@ class _CategoryPageState extends State<CategoryPage> {
     });
     return '';
   }
+
+
 }
