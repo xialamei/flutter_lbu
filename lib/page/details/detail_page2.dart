@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'detailmodel.dart';
 import 'package:my_flutter/provide/details_provider.dart';
 import 'package:provider/provider.dart';
+import 'detail_scan.dart';
 
 class DetailPage2 extends StatelessWidget {
   List<ChapterList> chapters;
@@ -18,7 +19,7 @@ class DetailPage2 extends StatelessWidget {
       child: Column(
         children: [
           createHeader(context),
-          createGridView(),
+          createGridView(context),
         ],
       ),
     );
@@ -50,7 +51,7 @@ class DetailPage2 extends StatelessWidget {
     );
   }
 
-  Widget createGridView() {
+  Widget createGridView(BuildContext context) {
     return Consumer<DetailsProvider>(builder: (context, detail, child) {
       chapters = detail.chapters;
       if (chapters.length == 0) {
@@ -70,15 +71,22 @@ class DetailPage2 extends StatelessWidget {
             ),
             itemCount: chapters.length,
             itemBuilder: (context, index) {
-              return Container(
-                padding: EdgeInsets.only(left: 10),
-                alignment: Alignment.centerLeft,
-                width: ScreenUtil().setWidth(730 / 2),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black12, width: 1),
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
+              return InkWell(
+                child: Container(
+                  padding: EdgeInsets.only(left: 10),
+                  alignment: Alignment.centerLeft,
+                  width: ScreenUtil().setWidth(730 / 2),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black12, width: 1),
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                  ),
+                  child: Text(chapters[index].name),
                 ),
-                child: Text(chapters[index].name),
+                onTap: (){
+                  Navigator.of(context).push(new MaterialPageRoute(builder: (context){
+                    return DetailScan(chapters[index].chapterId);
+                  }));
+                },
               );
             }),
 
@@ -86,4 +94,10 @@ class DetailPage2 extends StatelessWidget {
 
     });
   }
+
+
+
 }
+
+
+

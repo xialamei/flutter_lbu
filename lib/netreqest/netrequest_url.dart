@@ -10,6 +10,8 @@ const requestPath = {
 
   'detailsUrl' : mainUrl + 'comic/detail_static_new',//详情  参数：comicid
   'detailRealUrl':mainUrl + 'comic/detail_realtime' ,//详情实时 参数：comicid
-  'guessUrl' :mainUrl + 'comic/guessLike' //猜您喜欢
+  'guessUrl' :mainUrl + 'comic/guessLike', //猜您喜欢
+
+  'chapter':mainUrl + 'comic/chapterNew',//章节详情
 
 };

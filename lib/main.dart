@@ -13,6 +13,7 @@ import 'page/home/home_provider.dart';
 import 'page/category/categoryprovider.dart';
 import 'provide/details_provider.dart';
 import 'page/category/categorydetails.dart';
+import 'provide/scan_provider.dart';
 
 class CustomFlutterBinding extends WidgetsFlutterBinding  with  BoostFlutterBinding {
 
@@ -28,6 +29,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => HomeProvider()),
       ChangeNotifierProvider(create: (_) => CategoryProvider()),
       ChangeNotifierProvider(create: (_) => DetailsProvider()),
+      ChangeNotifierProvider(create: (_) => ScanProvider()),
     ],
 
     child: MyApp(),

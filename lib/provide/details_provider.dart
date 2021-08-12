@@ -28,4 +28,5 @@ class DetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
 }
