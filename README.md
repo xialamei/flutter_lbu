@@ -12,9 +12,14 @@ see the [add-to-app documentation](https://flutter.dev/docs/development/add-to-a
 
 
 ### 
-刚入门flutter的小白，项目还有很多bug正在一步步完善中
+
 
 
 
 ###
 修改master
+
+
+##
+刚入门flutter的小白，项目还有很多bug正在一步步完善中
+删除上面修改B
